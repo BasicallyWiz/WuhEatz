@@ -1,0 +1,33 @@
+﻿.wiz-card {
+  margin: 12px;
+  border-radius: 8px;
+  backdrop-filter: brightness(.8) blur(10px);
+  padding: 8px;
+}
+
+.wiz-font-body {
+  font-size:1rem;
+  margin: 2px;
+}
+
+.wiz-font-subtitle {
+  font-size:1.4rem;
+  font-style: normal;
+  margin: 2px;
+}
+
+.wiz-font-title {
+  font-size:1.8rem;
+  margin: 4px;
+}
+
+.wiz-font-title-l {
+  font-size:2.2rem;
+  margin: 8px;
+}
+
+.wiz-font-display {
+  font-size:4rem;
+  font-style: normal;
+  margin: 8px;
+}

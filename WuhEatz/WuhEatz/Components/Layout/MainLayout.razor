@@ -1,0 +1,25 @@
+﻿@inherits LayoutComponentBase
+@using WizWebComponents.Layout
+@using WizWebComponents.Data
+@using WizWebComponents.Buttons
+
+<div style="position: fixed; top: 0px; /*box-shadow: 1px 1px 3px #55555573; backdrop-filter: blur(5px);*/ width: 100%; z-index:1000; display: flex;">
+  <WizNavLink href="/#top" icon="/images/wuh.webp">
+    <Text Size="Title">Wuh Eatz</Text>
+  </WizNavLink>
+</div>
+@Body
+
+<Card>
+  <Text Size="Subtitle">This site is not owned by Denpafish</Text>
+  <p>Any and all names titles and icons referring to outside services are trademark of their respective owner.</p>
+  <div style="display: flex;">
+  <WizNavLink href="/credits"><Text Size="Body">Credits</Text></WizNavLink>
+  </div>
+</Card>
+<RootMediaPopover />
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>

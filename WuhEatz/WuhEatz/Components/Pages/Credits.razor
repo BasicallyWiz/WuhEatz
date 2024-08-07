@@ -1,0 +1,43 @@
+﻿@page "/credits"
+
+@using WizWebComponents.Buttons
+@using WizWebComponents.Data
+@using WizWebComponents.Layout
+@using WizWebComponents.Collections
+
+<div style="padding-top: 5rem; display: flex; flex-direction: column; align-items: center;">
+  <Text Size="Display">Credits</Text>
+  <Card style="width: 50rem; max-width: calc(100% - 40px);">
+    <Text Size="Title-L">Programmer</Text>
+    <GridRepeater>
+      <Text Size="Subtitle">BasicallyWiz</Text>
+    </GridRepeater>
+  </Card>
+  <Card style="width: 50rem; max-width: calc(100% - 40px);">
+    <Text Size="Title-L">Assets</Text>
+    <div style="margin-left: 1rem;">
+      <Text Size="Title">thelondonfoodie.co.uk</Text>
+      <WizNavLink href="?ShowImage=images/bistro-background.jpg"><Text Size="Subtitle">Bistro interior</Text></WizNavLink>
+
+      <Text Size="Title">Denpafish</Text>
+      <WizNavLink href="?ShowImage=images/Food/DenTummy.jpg"><Text Size="Subtitle">Denpa Tummy</Text></WizNavLink>
+      <WizNavLink href="?ShowImage=images/Food/Bunger.png"><Text Size="Subtitle">Denpa Eating Burger</Text></WizNavLink>
+
+      <Text Size="Title">Yuki</Text>
+
+      <WizNavLink href="?ShowImage=images/buy-me-food.png"><Text Size="Subtitle" style="margin-left: 1rem;">Buy My Food</Text></WizNavLink>
+
+
+      <Text Size="Title">Ginko</Text>
+      <WizNavLink href="?ShowImage=images/denpa_fish_bistro.jpg"><Text Size="Subtitle" style="margin-left: 1rem;">Denpafish Bistro Menu</Text></WizNavLink>
+      <WizNavLink href="?ShowImage=images/masterchef.jpg"><Text Size="Subtitle" style="margin-left: 1rem;">Masterchef Denpa</Text></WizNavLink>
+
+    </div>
+  </Card>
+  <Card style="width: 50rem; max-width: calc(100% - 40px);">
+    <Text Size="Title">Designer</Text>
+    <GridRepeater>
+      <Text Size="Subtitle">BasicallyWiz</Text>
+    </GridRepeater>
+  </Card>
+</div>

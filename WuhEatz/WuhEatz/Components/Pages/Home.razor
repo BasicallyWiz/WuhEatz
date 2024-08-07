@@ -1,0 +1,36 @@
+﻿@page "/"
+@using WizWebComponents.Data
+@using WizWebComponents.Layout
+@using WizWebComponents.Collections
+@using WizWebComponents.Buttons
+
+<PageTitle>Wuh Eatz!!</PageTitle>
+
+<div style="display: flex; flex-direction: column; margin-top: 8rem; align-items: center;">
+  <Text Size="Title-L" style="width: 100%; text-align: center;">Welcome to Wuh Eatz!</Text>
+  <img src="images/wuh.webp" style="align-self: center; width: 200px;"/>
+  <Text Size="Subtitle" style=" width: 100%; text-align: center;">Wuh loves to eatz!</Text>
+
+  <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+    <WizNavLink icon="https://static-cdn.jtvnw.net/jtv_user_pictures/64494c5f-29d5-4cfd-8188-fbbe3c62fbfd-profile_image-300x300.png" , href="https://streamlabs.com/denpafish/home"><Text Size="Title">Give to Denpa</Text></WizNavLink>
+    <WizNavLink icon="images/TwitchGlitchPurple.svg" href="https://www.twitch.tv/denpafish"><h2 class="wiz-font-title">Watch Denpa</h2></WizNavLink>
+  </div>
+
+  <Card style="align-self: center; width: 70rem; max-width: calc(100% - 40px);">
+    <Text Size="Title" style="margin-left: 20px;">A Few Things Wuh Likes To Eatz:</Text>
+    <Gallery Uris="@(new string[] { "images/Food/pickle.png", "images/Food/Bunger.png", "images/Food/chamoy.png", "images/Food/DenTummy.jpg"})" Size="20rem" />
+  </Card>
+  
+  <WizNavLink href="https://discord.gg/3aDvdZzgUJ" icon="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg"><h2 class="wiz-font-title">Speak with the Wuh Cruh</h2></WizNavLink>
+  <Text Size="Body">Denpafish Twitch subscription required for text channels</Text>
+  
+  <Card style="align-self: center; width: 50rem; max-width: calc(100% - 40px); display: flex; flex-direction: column; align-items: center">
+    <Text Size="Title" style="margin-left: 20px;">Masterchef Wuh invites you to the bistro!!</Text>
+    <img src="images/masterchef.jpg" style="width:20rem; align-self: center;" />
+    <WizNavLink href="/bistro">
+      <Text Size="Subtitle">
+        Let's look at the menu!!
+      </Text>
+    </WizNavLink>
+  </Card>
+</div>
