@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\WizWebComponents\WizWebComponents.csproj" />
+    <ProjectReference Include="..\WizWebComponents-Wuh\WizWebComponents.csproj" />
     <ProjectReference Include="..\WuhEatz.Client\WuhEatz.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.7" />
   </ItemGroup>

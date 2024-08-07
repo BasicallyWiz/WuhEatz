@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WuhEatz", "WuhEatz\WuhEatz\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WuhEatz.Client", "WuhEatz\WuhEatz.Client\WuhEatz.Client.csproj", "{EEC85338-6ACD-44AE-A4BD-AF99E4B16762}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WizWebComponents", "..\WizWebComponents\WizWebComponents.csproj", "{1D1D2717-A012-4ACA-9A5B-CB25A1EDE764}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WizWebComponents", "WuhEatz\WizWebComponents-Wuh\WizWebComponents.csproj", "{9B85D4DF-B487-4522-AF80-9BAED2671B95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{EEC85338-6ACD-44AE-A4BD-AF99E4B16762}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEC85338-6ACD-44AE-A4BD-AF99E4B16762}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEC85338-6ACD-44AE-A4BD-AF99E4B16762}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1D1D2717-A012-4ACA-9A5B-CB25A1EDE764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D1D2717-A012-4ACA-9A5B-CB25A1EDE764}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D1D2717-A012-4ACA-9A5B-CB25A1EDE764}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D1D2717-A012-4ACA-9A5B-CB25A1EDE764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B85D4DF-B487-4522-AF80-9BAED2671B95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B85D4DF-B487-4522-AF80-9BAED2671B95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B85D4DF-B487-4522-AF80-9BAED2671B95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B85D4DF-B487-4522-AF80-9BAED2671B95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

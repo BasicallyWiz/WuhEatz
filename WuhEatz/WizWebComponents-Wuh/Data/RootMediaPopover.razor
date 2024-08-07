@@ -1,0 +1,21 @@
+﻿@using WizWebComponents.Layout
+
+@if (isHidden) return;
+<div style="position: fixed; top: 0px; z-index: 100; height: 100vh; width: 100vw; display: flex; align-content: center; justify-content: center; backdrop-filter:blur(5px);">
+  <Card style="@popoverStyle">
+    @if(IsImage) {
+      <div style="display:flex; width: 100%; height: 4rem;">
+        <h1 class="wiz-font-title-l" style="flex-grow: 1;">Image View</h1>
+        <h1 style="right: 0px;" onclick="history.back()">Go Back</h1>
+      </div>
+      <img src="@MediaSource" style="max-width: 100%; max-height: calc(100% - 4rem); object-fit:contain;"/>
+    }
+    else if(IsVideo) {
+      <p>FUCK MY ASSHOLE</p>
+    }
+    else
+    {
+      @ChildContent
+    }
+  </Card>
+</div>

@@ -1,0 +1,9 @@
+﻿@using WizWebComponents.Layout
+
+<Card style="@galleryStyle">
+  @if (Uris?.Length > 0) {
+    @foreach (var uri in Uris) {
+      <img src="@(uri)" style="@itemStyle" />
+    }
+  }
+</Card>

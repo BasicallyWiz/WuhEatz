@@ -1,0 +1,16 @@
+﻿.authlink {
+  margin: 8px;
+  height: 100%;
+  aspect-ratio: 5/1;
+
+  display:flex;
+  justify-content: center;
+
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.authlink img {
+  margin: 8px;
+  height: calc(100% - (8px * 2));
+}

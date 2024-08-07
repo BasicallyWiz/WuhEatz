@@ -1,0 +1,7 @@
+﻿<div class="taglist-container">
+  @if (Tags is not null && Tags?.Count() > 0) {
+    @foreach (var tag in Tags) {
+      <a class="taglist-tag wiz-button">@tag</a>
+    }
+  }
+</div>
