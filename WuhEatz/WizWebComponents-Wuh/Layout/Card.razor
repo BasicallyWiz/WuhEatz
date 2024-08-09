@@ -1,8 +1,0 @@
-﻿<div class="wiz-card" style="display: flex; flex-direction: column;" @attributes="SplatValues">
-  @ChildContent
-</div>
-
-@code {
-  [Parameter] public RenderFragment? ChildContent { get; set; }
-  [Parameter(CaptureUnmatchedValues = true)] public Dictionary<string, object>? SplatValues { get; set; }
-}
