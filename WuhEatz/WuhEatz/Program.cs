@@ -13,7 +13,7 @@ namespace WuhEatz
           .AddInteractiveServerComponents()
           .AddInteractiveWebAssemblyComponents();
 
-      //builder.Services.AddControllers();  NO API CONTROLLERS ARE IMPLEMENTED YET, THIS LINE IS NOT NEEDED
+      builder.Services.AddControllers();
 
       var app = builder.Build();
 
@@ -30,7 +30,7 @@ namespace WuhEatz
         app.UseHttpsRedirection();
       }
 
-      //app.MapControllers();   NO API CONTROLLERS ARE IMPLEMENTED YET, THIS LINE IS NOT NEEDED
+      app.MapControllers();
 
       app.UseStaticFiles();
       app.UseAntiforgery();
