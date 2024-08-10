@@ -1,4 +1,5 @@
 using WuhEatz.Components;
+using WuhEatz.Services;
 
 namespace WuhEatz
 {
@@ -14,6 +15,14 @@ namespace WuhEatz
           .AddInteractiveWebAssemblyComponents();
 
       builder.Services.AddControllers();
+
+
+      var twtchsvc = new TwitchService()
+      {
+        //  TODO: When we are no longer testing the twitch service, set the timespan to something longer. Probably best to do 5 minutes.
+        TimeBetweenChecks = TimeSpan.FromMinutes(1)
+      };
+      builder.Services.AddScoped(x => twtchsvc);
 
       var app = builder.Build();
 
@@ -36,9 +45,9 @@ namespace WuhEatz
       app.UseAntiforgery();
 
       app.MapRazorComponents<App>()
-          .AddInteractiveServerRenderMode()
-          .AddInteractiveWebAssemblyRenderMode()
-          .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
+         .AddInteractiveServerRenderMode()
+         .AddInteractiveWebAssemblyRenderMode()
+         .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
 
       app.Run();
     }
