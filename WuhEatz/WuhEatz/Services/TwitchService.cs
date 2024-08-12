@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Headers;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.Json;
 using Timer = System.Timers.Timer;
@@ -113,10 +114,10 @@ namespace WuhEatz.Services
       try
       {
         // 779607673 <- This is Denpa's user ID in case we ever need that
-        var result = await client.GetAsync($"https://api.twitch.tv/helix/streams?user_login=snoozy"); //  Set to snoozy because at the time of writing, she's live.
+        var result = await client.GetAsync($"https://api.twitch.tv/helix/streams?user_login=marimari_en"); //  Set to others because at the time of writing, Denpa's not live
 
-        string StringResult = await result.Content.ReadAsStringAsync();
-        Console.WriteLine(StringResult);
+        string results = await result.Content.ReadAsStringAsync();
+        DenpaStats = JsonSerializer.Deserialize<DenpaTwitchStats>(results);
 
         //  TODO: Compile the result of this to the DenpaTwitchStats struct, and populate DenpaStats, so we can [hopefully] inject the data into pages
         //  Honestly I've been inplementing this all based on a guess this will work...
@@ -134,12 +135,49 @@ namespace WuhEatz.Services
   {
     //  TODO: Create a struct that can be populated by querying the https://api.twitch.tv/helix/streams?user_login=denpafish endpoint.
     //  Might have to query other streamers to get the return data, because Denpa's not gonna be live any time soon...
+    public Data[] data { get; init; }
+    public Pagination? pagination { get; init; }
+    public bool IsLive
+    {
+      get { if (data is not null) return data.Any(x => x.isLive); return false; }
+    }
+    public Data? LiveData
+    {
+      get { return data.First(x => x.isLive); }
+    }
   }
+
+  public struct Data
+    {
+      public string id { get; init; }
+      public string user_id { get; init; }
+      public string user_login { get; init; }
+      public string user_name { get; init; }
+      public string game_id { get; init; }
+      public string game_name { get; init; }
+      /// <remarks>
+      /// I've seen this parameter be "live" before, but i guess expect other possibilities...
+      /// </remarks>
+      public string type { get; init; }
+      public bool isLive { get { if (type == "live") return true; else return false; } }
+      public string title { get; init; }
+      public ulong viewer_count { get; init; }
+      public DateTime started_at { get; init; }
+      public string language { get; init; }
+      public string thumbnail_url { get; init; }
+      public string[]? tag_ids { get; init; } // I don't actually know what this is
+      public string[]? tags { get; init; }
+      public bool is_mature { get; init; }
+    }
+  public struct Pagination
+    {
+      public string cursor { get; internal set; }
+    }
 
   public struct TwitchToken
   {
-    public string access_token { get; set; }
-    public uint expires_in { get; set; }
-    public string token_type { get; set; }
+    public string access_token { get; init; }
+    public uint expires_in { get; init; }
+    public string token_type { get; init; }
   }
 }

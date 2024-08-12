@@ -6,11 +6,19 @@
 
 <PageTitle>Wuh Eatz!!</PageTitle>
 
-<div style="display: flex; flex-direction: column; margin-top: 8rem; align-items: center;">
-  <Text Size="Title-L" style="width: 100%; text-align: center;">Welcome to Wuh Eatz!</Text>
-  <img src="images/wuh.webp" style="align-self: center; width: 200px;"/>
-  <Text Size="Subtitle" style=" width: 100%; text-align: center;">Wuh loves to eatz!</Text>
-
+<div style="display: flex; flex-direction: column; margin-top: 4rem; align-items: center;">
+  @if (TwitchService!.DenpaStats.IsLive)
+  {
+    <h1 class="wiz-font-display" style="width: 100%; margin: 6px; text-align: center; color: white;">Denpa is live!!</h1>
+    <div style="align-self: center; aspect-ratio: 16/9; height: max-content; width: max-content; max-width: 95%; max-height: 40rem;">
+      <iframe src="@("https://player.twitch.tv/?channel=marimari_en&parent=" + Nav?.BaseUri.Replace("https://", "").Replace("http://", "").Replace("/", ""))" height="1080" width="1920" frameborder="0" allowfullscreen="true" scrolling="no" style="max-width: 100%; max-height: 100%; border-radius: 10px;"></iframe>
+    </div>
+  }
+  else {
+    <h1 Size="Title-L" style="width: 100%; text-align: center;">Welcome to Wuh Eatz!</h1>
+    <img src="images/wuh.webp" style="align-self: center; width: 200px;"/>
+    <h1 Size="Subtitle" style=" width: 100%; text-align: center;">Wuh loves to eatz!</h1>
+  }
   <div style="display: flex; flex-wrap: wrap; justify-content: center;">
     <WizNavLink icon="https://static-cdn.jtvnw.net/jtv_user_pictures/64494c5f-29d5-4cfd-8188-fbbe3c62fbfd-profile_image-300x300.png" , href="https://streamlabs.com/denpafish/home"><Text Size="Title">Give to Denpa</Text></WizNavLink>
     <WizNavLink icon="images/TwitchGlitchPurple.svg" href="https://www.twitch.tv/denpafish"><h2 class="wiz-font-title">Denpa Streams</h2></WizNavLink>
