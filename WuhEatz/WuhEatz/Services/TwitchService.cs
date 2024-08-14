@@ -118,9 +118,6 @@ namespace WuhEatz.Services
 
         string results = await result.Content.ReadAsStringAsync();
         DenpaStats = JsonSerializer.Deserialize<DenpaTwitchStats>(results);
-
-        //  TODO: Compile the result of this to the DenpaTwitchStats struct, and populate DenpaStats, so we can [hopefully] inject the data into pages
-        //  Honestly I've been inplementing this all based on a guess this will work...
       }
       catch (Exception ex)
       {
@@ -133,8 +130,6 @@ namespace WuhEatz.Services
 
   public struct DenpaTwitchStats
   {
-    //  TODO: Create a struct that can be populated by querying the https://api.twitch.tv/helix/streams?user_login=denpafish endpoint.
-    //  Might have to query other streamers to get the return data, because Denpa's not gonna be live any time soon...
     public Data[] data { get; init; }
     public Pagination? pagination { get; init; }
     public bool IsLive
