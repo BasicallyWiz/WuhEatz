@@ -114,7 +114,7 @@ namespace WuhEatz.Services
       try
       {
         // 779607673 <- This is Denpa's user ID in case we ever need that
-        var result = await client.GetAsync($"https://api.twitch.tv/helix/streams?user_login=marimari_en"); //  Set to others because at the time of writing, Denpa's not live
+        var result = await client.GetAsync($"https://api.twitch.tv/helix/streams?user_login=denpafish"); //  Set to others because at the time of writing, Denpa's not live
 
         string results = await result.Content.ReadAsStringAsync();
         DenpaStats = JsonSerializer.Deserialize<DenpaTwitchStats>(results);
