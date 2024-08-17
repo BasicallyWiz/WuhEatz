@@ -43,8 +43,6 @@ This folder contains all of the services that run behind the serverr, such as th
 ### Database integration
 This should allow for many more features down the road that require data to be recorded.
 
-Would probably be best to use MariaDB? (WuhEatz is being run on a raspberry pi. I've already tried Mongo) Use this [EFCore Package](https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MySql) for implementation.
-
 ### Denpa Archive
 This will be a library of images and other media (or something) that can be used for archiving art and media for and by Denpa.
 

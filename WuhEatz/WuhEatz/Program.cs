@@ -49,6 +49,8 @@ namespace WuhEatz
          .AddInteractiveWebAssemblyRenderMode()
          .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
 
+      
+
       app.Run();
     }
   }

@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using Microsoft.AspNetCore.Components;
+using System.Net.Http.Headers;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.Json;
@@ -12,10 +13,11 @@ namespace WuhEatz.Services
     public DenpaTwitchStats DenpaStats { get; private set; }
 
     public string clientId { get; init; } = "";
-    public string clientSecret { get; init; } = "";
-    public string grantType { get; init; } = "client_credentials";
+    string clientSecret { get; init; } = "";
+    string grantType { get; init; } = "client_credentials";
 
     bool IsTwitchEnabled { get; set; } = false;
+
     HttpClient client { get; set; }
     TwitchToken token { get; set; }
 
@@ -39,13 +41,14 @@ namespace WuhEatz.Services
       _ = Task.Run(ExecuteAsync);
     }
 
+    //TODO: After five consecutive failed attempts to get a token, disable Twitch integrations, and disable timers.
     async Task ExecuteAsync()
     {
       await GetAccessToken();
       if (!IsTwitchEnabled) return;
 
       Timer workTimer = new Timer(TimeBetweenChecks);
-      workTimer.Elapsed += async (sender, e) => await DoWork();
+      workTimer.Elapsed += async (sender, e) => await CheckDenpaLive();
       workTimer.AutoReset = true;
       workTimer.Start();
 
@@ -56,7 +59,7 @@ namespace WuhEatz.Services
       validateTimer.Start();
 
       await ValidateToken();
-      await DoWork();
+      await CheckDenpaLive();
     }
     async Task GetAccessToken()
     {
@@ -79,7 +82,7 @@ namespace WuhEatz.Services
       }
       catch (Exception ex) { 
         Console.WriteLine(ex);
-        IsTwitchEnabled = false; 
+        IsTwitchEnabled = false;
       }
     }
     async Task ValidateToken()
@@ -98,7 +101,7 @@ namespace WuhEatz.Services
         return;
       }
     }
-    async Task DoWork()
+    async Task CheckDenpaLive()
     {
       if (IsTwitchEnabled == false)
       {
@@ -125,6 +128,11 @@ namespace WuhEatz.Services
         Console.WriteLine(ex);
         IsTwitchEnabled = false;
       }
+    }
+
+    public string GetAuthUrl(NavigationManager Nav)
+    {
+      return $"https://id.twitch.tv/oauth2/authorize?client_id={clientId}&redirect_uri={Nav.BaseUri}&response_type=code&scope=user:read user:read:subscriptions";
     }
   }
 
