@@ -4,8 +4,10 @@ namespace WuhEatz.Services
 {
   public class MongoService
   {
-    bool isEnabled = true;
+    public static MongoService? instance;
+    public bool isEnabled = true;
     string connectionString = "";
+    public MongoClient? client;
 
     public MongoService()
     {
@@ -29,7 +31,7 @@ namespace WuhEatz.Services
         return;
       }
 
-      var client = new MongoClient(connectionString);
+      client = new MongoClient(connectionString);
     }
   }
 }

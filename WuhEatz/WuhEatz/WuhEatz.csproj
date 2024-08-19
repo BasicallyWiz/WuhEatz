@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Properties\__launchSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\WizWebComponents\WizWebComponents.csproj" />
     <ProjectReference Include="..\WuhEatz.Client\WuhEatz.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8" />
@@ -15,8 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DenpaDB\Contexts\" />
-    <Folder Include="DenpaDB\Models\" />
     <Folder Include="wwwroot\images\Food\" />
   </ItemGroup>
 

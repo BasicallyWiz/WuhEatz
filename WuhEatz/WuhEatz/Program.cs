@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using WuhEatz.Components;
 using WuhEatz.Services;
 
@@ -5,6 +6,8 @@ namespace WuhEatz
 {
   public class Program
   {
+    public static MongoService? mongoService;
+
     public static void Main(string[] args)
     {
       var builder = WebApplication.CreateBuilder(args);
@@ -20,9 +23,11 @@ namespace WuhEatz
       var twtchsvc = new TwitchService()
       {
         //  TODO: When we are no longer testing the twitch service, set the timespan to something longer. Probably best to do 5 minutes.
-        TimeBetweenChecks = TimeSpan.FromMinutes(1)
+        TimeBetweenChecks = TimeSpan.FromMinutes(5)
       };
       builder.Services.AddScoped(x => twtchsvc);
+
+      MongoService.instance = new();
 
       var app = builder.Build();
 
@@ -48,8 +53,6 @@ namespace WuhEatz
          .AddInteractiveServerRenderMode()
          .AddInteractiveWebAssemblyRenderMode()
          .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
-
-      
 
       app.Run();
     }
