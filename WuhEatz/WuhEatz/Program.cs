@@ -54,6 +54,11 @@ namespace WuhEatz
          .AddInteractiveWebAssemblyRenderMode()
          .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
 
+      /**
+       * System.Net.Sockets.SocketException: 'The requested address is not valid in its context.'
+       * Go to ./Properties/launchSettings.json and change "applicationUrl" for http and https to addresses available to you.
+       * This error throws when ASPNet core tries to listen to a used or inaccessible address.
+       */
       app.Run();
     }
   }
