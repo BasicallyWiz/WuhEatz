@@ -8,7 +8,9 @@ namespace WuhEatz.Client
     {
       var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-      await builder.Build().RunAsync();
+      WebAssemblyHost app = builder.Build();
+      
+      await app.RunAsync();
     }
   }
 }

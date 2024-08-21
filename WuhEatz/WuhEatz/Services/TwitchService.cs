@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Net.Http.Headers;
-using System.Net.NetworkInformation;
-using System.Text;
 using System.Text.Json;
 using Timer = System.Timers.Timer;
+using WuhEatz.ExternalDataModels.Twitch;
 
 namespace WuhEatz.Services
 {
+  /// <summary>
+  /// Service for some client-Twitch integrations.
+  /// </summary>
+  /// <remarks>
+  /// I think this is server-executed, but many members are accessible on the client.
+  /// </remarks>
   public class TwitchService
   {
     public TimeSpan TimeBetweenChecks { get; init; } = TimeSpan.FromSeconds(60);
@@ -19,7 +23,7 @@ namespace WuhEatz.Services
     bool IsTwitchEnabled { get; set; } = false;
 
     HttpClient client { get; set; }
-    TwitchToken token { get; set; }
+    TokenData token { get; set; }
 
     public TwitchService()
     {
@@ -73,7 +77,7 @@ namespace WuhEatz.Services
         IsTwitchEnabled = true;
 
         string res = await result.Content.ReadAsStringAsync();
-        token = JsonSerializer.Deserialize<TwitchToken>(res);
+        token = JsonSerializer.Deserialize<TokenData>(res);
 
         client.DefaultRequestHeaders.Remove("Authorization");
         client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token.access_token}");
@@ -132,55 +136,25 @@ namespace WuhEatz.Services
 
     public string GetAuthUrl(NavigationManager Nav)
     {
-      return $"https://id.twitch.tv/oauth2/authorize?client_id={clientId}&redirect_uri={Nav.BaseUri}&response_type=code&scope=user:read user:read:subscriptions";
+      return $"https://id.twitch.tv/oauth2/authorize?client_id={clientId}&redirect_uri={Nav.BaseUri}&response_type=code&scope=user:read:subscriptions";
     }
   }
 
   public struct DenpaTwitchStats
   {
-    public Data[] data { get; init; }
+    public StreamData[] data { get; init; }
     public Pagination? pagination { get; init; }
     public bool IsLive
     {
       get { if (data is not null) return data.Any(x => x.isLive); return false; }
     }
-    public Data? LiveData
+    public StreamData? LiveData
     {
       get { return data.First(x => x.isLive); }
     }
   }
-
-  public struct Data
-    {
-      public string id { get; init; }
-      public string user_id { get; init; }
-      public string user_login { get; init; }
-      public string user_name { get; init; }
-      public string game_id { get; init; }
-      public string game_name { get; init; }
-      /// <remarks>
-      /// I've seen this parameter be "live" before, but i guess expect other possibilities...
-      /// </remarks>
-      public string type { get; init; }
-      public bool isLive { get { if (type == "live") return true; else return false; } }
-      public string title { get; init; }
-      public ulong viewer_count { get; init; }
-      public DateTime started_at { get; init; }
-      public string language { get; init; }
-      public string thumbnail_url { get; init; }
-      public string[]? tag_ids { get; init; } // I don't actually know what this is
-      public string[]? tags { get; init; }
-      public bool is_mature { get; init; }
-    }
   public struct Pagination
     {
       public string cursor { get; internal set; }
     }
-
-  public struct TwitchToken
-  {
-    public string access_token { get; init; }
-    public uint expires_in { get; init; }
-    public string token_type { get; init; }
-  }
 }

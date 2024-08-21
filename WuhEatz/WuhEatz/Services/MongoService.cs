@@ -33,5 +33,8 @@ namespace WuhEatz.Services
 
       client = new MongoClient(connectionString);
     }
+
+    public IMongoDatabase GetDatabase(string DBName) => client!.GetDatabase(DBName);
+
   }
 }

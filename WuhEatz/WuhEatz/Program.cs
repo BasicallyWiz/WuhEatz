@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using WuhEatz.Components;
+using WuhEatz.Middleware;
 using WuhEatz.Services;
 
 namespace WuhEatz
@@ -25,9 +26,11 @@ namespace WuhEatz
         //  TODO: When we are no longer testing the twitch service, set the timespan to something longer. Probably best to do 5 minutes.
         TimeBetweenChecks = TimeSpan.FromMinutes(5)
       };
-      builder.Services.AddScoped(x => twtchsvc);
 
-      MongoService.instance = new();
+      builder.Services.AddScoped(x => twtchsvc);
+      builder.Services.AddScoped(x => new HttpClient());
+
+      //MongoService.instance = new();
 
       var app = builder.Build();
 
@@ -44,6 +47,7 @@ namespace WuhEatz
         app.UseHttpsRedirection();
       }
 
+      app.UseProfileLogin();
       app.MapControllers();
 
       app.UseStaticFiles();
