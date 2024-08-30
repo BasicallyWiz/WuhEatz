@@ -30,7 +30,7 @@ namespace WuhEatz
       builder.Services.AddScoped(x => twtchsvc);
       builder.Services.AddScoped(x => new HttpClient());
 
-      //MongoService.instance = new();
+      MongoService.instance = new();
 
       var app = builder.Build();
 
@@ -47,7 +47,7 @@ namespace WuhEatz
         app.UseHttpsRedirection();
       }
 
-      app.UseProfileLogin();
+      //app.UseProfileLogin();
       app.MapControllers();
 
       app.UseStaticFiles();

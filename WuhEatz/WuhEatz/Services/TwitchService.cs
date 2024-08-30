@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Text.Json;
 using Timer = System.Timers.Timer;
-using WuhEatz.ExternalDataModels.Twitch;
+using WuhEatz.Shared.ExternalDataModels.Twitch;
 
 namespace WuhEatz.Services
 {
@@ -77,7 +77,7 @@ namespace WuhEatz.Services
         IsTwitchEnabled = true;
 
         string res = await result.Content.ReadAsStringAsync();
-        token = JsonSerializer.Deserialize<TokenData>(res);
+        token = JsonSerializer.Deserialize<TokenData>(res)!;
 
         client.DefaultRequestHeaders.Remove("Authorization");
         client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token.access_token}");
@@ -121,7 +121,7 @@ namespace WuhEatz.Services
       try
       {
         // 779607673 <- This is Denpa's user ID in case we ever need that
-        var result = await client.GetAsync($"https://api.twitch.tv/helix/streams?user_login=denpafish"); //  Set to others because at the time of writing, Denpa's not live
+        var result = await client.GetAsync($"https://api.twitch.tv/helix/streams?user_login=denpafish");
 
         string results = await result.Content.ReadAsStringAsync();
         DenpaStats = JsonSerializer.Deserialize<DenpaTwitchStats>(results);
