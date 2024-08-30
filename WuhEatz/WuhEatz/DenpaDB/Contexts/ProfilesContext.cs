@@ -10,15 +10,11 @@ namespace WuhEatz.DenpaDB.Contexts
     public ProfilesContext(DbContextOptions options) : base(options) { }
 
     public DbSet<UserProfile> Profiles { get; init; }
-    public DbSet<Session> Sessions { get; init; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       base.OnModelCreating(modelBuilder);
-
-      modelBuilder.Entity<Session>()
-        .HasOne(s => s.Owner)
-        .WithMany(up => up.Sessions);
+      modelBuilder.Entity<UserProfile>().ToCollection("profiles");
     }
 
     public static ProfilesContext Create(IMongoDatabase database) =>

@@ -1,8 +1,5 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.CookiePolicy;
+using System.Runtime.CompilerServices;
+using WuhEatz.Components;
 using WuhEatz.Middleware;
 using WuhEatz.Services;
 
@@ -18,12 +15,11 @@ namespace WuhEatz
 
       // Add services to the container.
       builder.Services.AddRazorComponents()
-          .AddInteractiveServerComponents();
-          //.AddInteractiveWebAssemblyComponents();
+          .AddInteractiveServerComponents()
+          .AddInteractiveWebAssemblyComponents();
 
       builder.Services.AddControllers();
-      builder.Services.AddRazorPages();
-      //builder.Services.AddHttpClient();
+
 
       var twtchsvc = new TwitchService()
       {
@@ -32,11 +28,11 @@ namespace WuhEatz
       };
 
       builder.Services.AddScoped(x => twtchsvc);
+      builder.Services.AddScoped(x => new HttpClient());
 
-      MongoService.instance = new();
+      //MongoService.instance = new();
 
       var app = builder.Build();
-
 
       // Configure the HTTP request pipeline.
       if (app.Environment.IsDevelopment())
@@ -51,20 +47,17 @@ namespace WuhEatz
         app.UseHttpsRedirection();
       }
 
-      //app.UseProfileLogin();
+      app.UseProfileLogin();
+      app.MapControllers();
 
-      app.UseBlazorFrameworkFiles();
       app.UseStaticFiles();
-
       app.UseAntiforgery();
 
-      //app.MapRazorComponents<App>()
-      //   .AddInteractiveServerRenderMode();
-      //   .AddInteractiveWebAssemblyRenderMode();
+      app.MapRazorComponents<App>()
+         .AddInteractiveServerRenderMode()
+         .AddInteractiveWebAssemblyRenderMode()
+         .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
 
-      app.MapRazorPages();
-      app.MapControllers();
-      app.MapFallbackToFile("index.html");
       /**
        * System.Net.Sockets.SocketException: 'The requested address is not valid in its context.'
        * Go to ./Properties/launchSettings.json and change "applicationUrl" for http and https to addresses available to you.

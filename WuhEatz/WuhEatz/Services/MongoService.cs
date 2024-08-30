@@ -1,5 +1,4 @@
 ﻿using MongoDB.Driver;
-using WuhEatz.DenpaDB.Contexts;
 
 namespace WuhEatz.Services
 {
@@ -33,10 +32,6 @@ namespace WuhEatz.Services
       }
 
       client = new MongoClient(connectionString);
-
-      var ctx = StartupContext.Create(client.GetDatabase("DenpaDB"));
-      ctx.Database.EnsureCreated();
-      ctx.SaveChanges();
     }
 
     public IMongoDatabase GetDatabase(string DBName) => client!.GetDatabase(DBName);
