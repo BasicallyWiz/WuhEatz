@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
-using WuhEatz.Services;
+using WuhEatz.Client.Services;
 
-namespace WuhEatz.Components.Pages
+namespace WuhEatz.Client.Components.Pages
 {
   partial class Home
   {
-    [Inject] public TwitchService? TwitchService { get; set; }
+    [Inject] public ClientTwitchService? TwitchService { get; set; }
     [Inject] public NavigationManager? Nav { get; set; }
 
     protected override void OnInitialized()

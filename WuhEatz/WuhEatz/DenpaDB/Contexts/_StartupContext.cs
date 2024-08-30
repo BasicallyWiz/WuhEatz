@@ -5,24 +5,25 @@ using WuhEatz.DenpaDB.Models;
 
 namespace WuhEatz.DenpaDB.Contexts
 {
-  public class ProfilesContext : DbContext
+  public class StartupContext : DbContext
   {
-    public ProfilesContext(DbContextOptions options) : base(options) { }
+    public StartupContext(DbContextOptions options) : base(options) { }
 
+    //public DbSet<ArchiveObject> ArchiveObjects { get; init; }
     public DbSet<UserProfile> Profiles { get; init; }
-    public DbSet<Session> Sessions { get; init; }
+    //public DbSet<Session> Sessions { get; init; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       base.OnModelCreating(modelBuilder);
 
-      modelBuilder.Entity<Session>()
-        .HasOne(s => s.Owner)
-        .WithMany(up => up.Sessions);
+      modelBuilder.Entity<UserProfile>()
+        .HasMany(up => up.Sessions)
+        .WithOne(s => s.Owner);
     }
 
-    public static ProfilesContext Create(IMongoDatabase database) =>
-        new(new DbContextOptionsBuilder<ProfilesContext>()
+    public static StartupContext Create(IMongoDatabase database) =>
+        new(new DbContextOptionsBuilder<StartupContext>()
             .UseMongoDB(database.Client, database.DatabaseNamespace.DatabaseName)
             .Options);
   }

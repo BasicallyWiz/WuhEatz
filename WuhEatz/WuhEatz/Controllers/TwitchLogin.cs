@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WuhEatz.ExternalDataModels.Twitch;
+using WuhEatz.DenpaDB.Contexts;
+using WuhEatz.DenpaDB.Models;
+using WuhEatz.Shared.ExternalDataModels.Twitch;
+using WuhEatz.Services;
 
 namespace WuhEatz.Controllers
 {
@@ -33,11 +36,29 @@ namespace WuhEatz.Controllers
       TwitchUser user = users!.data.First();
 
       if ((user.AccountAge.TotalDays / 365) < 1) return Unauthorized(new { title = "ACCOUNT_TOO_YOUNG", message = "For spam protection reasons, you cannot sign in with a Twitch account less than ONE YEAR old." });
-      
-      //TODO: Now that we've got Twitch account info, and verified that it's pretty damn likely not to be a spam account, let's now create a profile useable on WuhEatz.
-      //var DBctx = ProfilesContext.Create(MongoService.instance!.GetDatabase("DenpaDB"));
 
-      return Ok();
+      //TODO: Now that we've got Twitch account info, and verified that it's pretty damn likely not to be a spam account, let's now create a profile useable on WuhEatz.
+      var DenpaDB = MongoService.instance!.GetDatabase("DenpaDB");
+      var DBctx = ProfilesContext.Create(DenpaDB);
+
+      var NewUser = new UserProfile()
+      {
+        Username = user.display_name ?? user.login,
+        TwitchData = user,
+        Auth = info
+      };
+
+      var NewSession = new Session()
+      { 
+        Owner = NewUser 
+      };
+
+      DBctx.Profiles.Add(NewUser);
+      DBctx.Sessions.Add(NewSession);
+
+      DBctx.SaveChanges();
+
+      return Ok(NewSession.Code);
     }
 
     //[HttpGet]

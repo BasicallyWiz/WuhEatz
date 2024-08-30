@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Text.Json;
 using Timer = System.Timers.Timer;
-using WuhEatz.ExternalDataModels.Twitch;
+using WuhEatz.Shared.ExternalDataModels.Twitch;
 
 namespace WuhEatz.Services
 {
@@ -13,7 +13,7 @@ namespace WuhEatz.Services
   /// </remarks>
   public class TwitchService
   {
-    public TimeSpan TimeBetweenChecks { get; init; } = TimeSpan.FromSeconds(60);
+    public TimeSpan TimeBetweenChecks { get; init; } = TimeSpan.FromMinutes(10);
     public DenpaTwitchStats DenpaStats { get; private set; }
 
     public string clientId { get; init; } = "";
@@ -23,7 +23,7 @@ namespace WuhEatz.Services
     bool IsTwitchEnabled { get; set; } = false;
 
     HttpClient client { get; set; }
-    TokenData token { get; set; }
+    TokenData? token { get; set; }
 
     public TwitchService()
     {
@@ -134,27 +134,9 @@ namespace WuhEatz.Services
       }
     }
 
-    public string GetAuthUrl(NavigationManager Nav)
+    public string GetAuthUrl(string redirect_uri_host)
     {
-      return $"https://id.twitch.tv/oauth2/authorize?client_id={clientId}&redirect_uri={Nav.BaseUri}&response_type=code&scope=user:read:subscriptions";
+      return $"https://id.twitch.tv/oauth2/authorize?client_id={clientId}&redirect_uri={redirect_uri_host}&response_type=code&scope=user:read:subscriptions";
     }
   }
-
-  public struct DenpaTwitchStats
-  {
-    public StreamData[] data { get; init; }
-    public Pagination? pagination { get; init; }
-    public bool IsLive
-    {
-      get { if (data is not null) return data.Any(x => x.isLive); return false; }
-    }
-    public StreamData? LiveData
-    {
-      get { return data.First(x => x.isLive); }
-    }
-  }
-  public struct Pagination
-    {
-      public string cursor { get; internal set; }
-    }
 }
