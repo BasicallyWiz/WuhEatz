@@ -20,8 +20,6 @@ namespace WuhEatz.Middleware
       string? accessState;
         query.TryGetValue("state", out accessState);
 
-      Console.WriteLine("sessioncookie: " + cookies["session"]);
-
       // Check if user is trying to log in. Ff not, check if the user is already logged in.
       if (accessCode is not null && accessScope is not null)
       {
@@ -29,19 +27,19 @@ namespace WuhEatz.Middleware
         var result = await client.PostAsync($"{Nav.BaseUri}api/TwitchLogin?AccessCode={accessCode}&AccessScope={accessScope}", null);
 
         cookies.Add(new Cookie("session", await result.Content.ReadAsStringAsync(), Nav.BaseUri.Split(':')[1].Replace("/", ""), DateTime.Now.AddMonths(1)));
-
       }
       else if (cookies["session"] is not null)
       {
-        Console.WriteLine("Validating Cookies...");
-        await client.GetAsync($"{Nav.BaseUri}api/TwitchLogin");
+        Console.WriteLine("Validating session...");
+        var result = await client.GetAsync($"{Nav.BaseUri}api/TwitchLogin");
+        if (result.IsSuccessStatusCode)
+          Console.WriteLine("Session is valid!");
+
         //  TODO: Request a validation check from the server to see if the session is still valid.
         //  If the session is valid, uhh... I forgor. I think we can do nothing.
         //  If the session is invalid, redirect to the login page.
       }
       //  If neither of the above are true, do nothing.
-
-      //await _next(context);
     }
   }
 }

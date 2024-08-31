@@ -136,7 +136,7 @@ namespace WuhEatz.Services
 
     public string GetAuthUrl(NavigationManager Nav)
     {
-      return $"https://id.twitch.tv/oauth2/authorize?client_id={clientId}&redirect_uri={Nav.BaseUri}&response_type=code&scope=user:read:subscriptions";
+      return $"https://id.twitch.tv/oauth2/authorize?client_id={clientId}&redirect_uri={Nav.BaseUri.Replace("http://", "https://")}&response_type=code&scope=user:read:subscriptions";
     }
   }
 

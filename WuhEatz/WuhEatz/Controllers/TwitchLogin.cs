@@ -4,6 +4,8 @@ using WuhEatz.DenpaDB.Contexts;
 using WuhEatz.DenpaDB.Models;
 using WuhEatz.Shared.ExternalDataModels.Twitch;
 using WuhEatz.Services;
+using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson;
 
 namespace WuhEatz.Controllers
 {
@@ -47,12 +49,12 @@ namespace WuhEatz.Controllers
       }
       else SubData = null;
 
-      //TODO: Now that we've got Twitch account info, and verified that it's pretty damn likely not to be a spam account, let's now create a profile useable on WuhEatz.
       var DenpaDB = MongoService.instance!.GetDatabase("DenpaDB");
       var DBctx = ProfilesContext.Create(DenpaDB);
 
       var NewUser = new UserProfile()
       {
+        _id = ObjectId.GenerateNewId(),
         Username = user.display_name ?? user.login,
         TwitchData = user,
         SubData = SubData?.data.First(x => x.broadcaster_login == "denpafish"),
@@ -60,8 +62,9 @@ namespace WuhEatz.Controllers
       };
 
       var NewSession = new Session()
-      { 
-        Owner = NewUser 
+      {
+        _id = ObjectId.GenerateNewId(),
+        Owner = NewUser
       };
 
       DBctx.Profiles.Add(NewUser);
@@ -77,18 +80,26 @@ namespace WuhEatz.Controllers
     {
       string? session = Request.Cookies["session"];
       if (session is null) return Unauthorized(new { title = "NO_SESSION", message = "You need a session to validate a session." });
-
+    
       var ctx = ProfilesContext.Create(MongoService.instance!.GetDatabase("DenpaDB"));
-
+    
       var DBSession = ctx.Sessions.FirstOrDefault(x => x.Code == session);
       if (DBSession is null) return Unauthorized(new { title = "INVALID_SESSION", message = "The session you provided is invalid." });
       if (DateTime.Now > DBSession.ExpiresAt) return Unauthorized(new { title = "SESSION_EXPIRED", message = "The session you provided has expired." });
+
+      UserProfile? DBUser = ctx.Profiles.FirstOrDefault(x => x._id == DBSession.Owner_id);
+      if (DBUser is null) return Unauthorized(new { title = "USER_DOESNT_EXIST", message = "Oddly, Your session is in the database, but there's no user attached..." });
+
       HttpClient client = new HttpClient();
-      client.DefaultRequestHeaders.Add("Authorization", $"Bearer: {DBSession.Owner.Auth.access_token}");
+      client.DefaultRequestHeaders.Add("Authorization", $"Bearer {DBSession.Owner.Auth.access_token}");
       client.DefaultRequestHeaders.Add("Client-Id", System.IO.File.ReadAllLines("TwitchApi.token")[0]);
-      var result = await client.GetFromJsonAsync<SubscriptionData>($"https://api.twitch.tv/helix/subscriptions/user?broadcaster_id=779607673?user_id={DBSession.Owner.TwitchData.id}");
-      Console.WriteLine(result?.broadcaster_name);
-      return Ok();
+      var result = await client.GetFromJsonAsync<Subscriptions>($"https://api.twitch.tv/helix/subscriptions/user?broadcaster_id=779607673&user_id={DBUser.TwitchData.id}");
+
+      DBUser.SubData = result?.data[0];
+      ctx.Profiles.Update(DBUser);
+      ctx.SaveChanges();
+
+      return Ok($"Welcome back, {DBUser.Username}");
     }
 
     public struct UsersQueryData

@@ -12,7 +12,7 @@ namespace WuhEatz.DenpaDB.Models
     public required TwitchUser TwitchData { get; set; }
     public required TwitchOAuthAccessInfo Auth { get; set; }
     public SubscriptionData? SubData { get; set; }
-    public virtual ICollection<Session>? Sessions { get; set; }
+    public ICollection<Session> Sessions { get; set; } = new List<Session>();
     public int DenpaSubTeir { get; set; } = 0;
   }
 }

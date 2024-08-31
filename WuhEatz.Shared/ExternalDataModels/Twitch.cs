@@ -30,46 +30,46 @@ public class TwitchUser
 
 public class TokenData
 {
-  public required string access_token { get; init; }
-  public required uint expires_in { get; init; }
-  public required string token_type { get; init; }
+  public required string access_token { get; set; }
+  public required uint expires_in { get; set; }
+  public required string token_type { get; set; }
 }
 
 public class StreamData
 {
-  public required string id { get; init; }
-  public required string user_id { get; init; }
-  public required string user_login { get; init; }
-  public required string user_name { get; init; }
-  public string? game_id { get; init; }
-  public string? game_name { get; init; }
+  public required string id { get; set; }
+  public required string user_id { get; set; }
+  public required string user_login { get; set; }
+  public required string user_name { get; set; }
+  public string? game_id { get; set; }
+  public string? game_name { get; set; }
   /// <remarks>
       /// I've only ever seen this parameter be "live" before, but i guess expect other possibilities...
       /// </remarks>
-  public string? type { get; init; }
+  public string? type { get; set; }
   public bool isLive { get { if (type == "live") return true; else return false; } }
-  public required string title { get; init; }
-  public required ulong viewer_count { get; init; }
-  public required DateTime started_at { get; init; }
-  public required string language { get; init; }
-  public required string thumbnail_url { get; init; }
-  public string[]? tag_ids { get; init; } // I don't actually know what this is
-  public string[]? tags { get; init; }
-  public bool is_mature { get; init; } = false;
+  public required string title { get; set; }
+  public required ulong viewer_count { get; set; }
+  public required DateTime started_at { get; set; }
+  public required string language { get; set; }
+  public required string thumbnail_url { get; set; }
+  public string[]? tag_ids { get; set; } // I don't actually know what this is
+  public string[]? tags { get; set; }
+  public bool is_mature { get; set; } = false;
 }
 
 public class Subscriptions
 {
-  public SubscriptionData[] data { get; init; }
+  public SubscriptionData[] data { get; set; }
 }
 public class SubscriptionData
 {
-  public required string broadcaster_id { get; init; }
-  public required string broadcaster_name { get; init; }
-  public required string broadcaster_login { get; init; }
-  public required string tier { get; init; }
-  public bool is_gift { get; init; }
-  public string? gifter_id { get; init; }
-  public string? gifter_login { get; init; }
-  public string? gifter_name { get; init; }
+  public required string broadcaster_id { get; set; }
+  public required string broadcaster_name { get; set; }
+  public required string broadcaster_login { get; set; }
+  public required string tier { get; set; }
+  public bool is_gift { get; set; }
+  public string? gifter_id { get; set; }
+  public string? gifter_login { get; set; }
+  public string? gifter_name { get; set; }
 }
