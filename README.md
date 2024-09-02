@@ -12,7 +12,7 @@ ProjectsFolder/
       WizWebComponents.csproj
     WuhEatz/
       WuhEatz.sln
-      WuhEatz/
+      WuhEatz/WuhEatz/
         WuhEatz.csproj
 ```
 By default, the project structure should look similar to this, with both projects having their root folder in the same location.
