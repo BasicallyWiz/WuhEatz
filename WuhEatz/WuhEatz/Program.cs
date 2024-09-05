@@ -2,16 +2,17 @@ using System.Runtime.CompilerServices;
 using WuhEatz.Components;
 using WuhEatz.Middleware;
 using WuhEatz.Services;
+using WuhEatz.Shared.Services;
 
 namespace WuhEatz
 {
   public class Program
   {
     public static MongoService? mongoService;
-
+    public static WuhLogger logger = new("/Logs");
     public static void Main(string[] args)
     {
-      var builder = WebApplication.CreateBuilder(args);
+      var builder = WebApplication.CreateBuilder(args); 
 
       // Add services to the container.
       builder.Services.AddRazorComponents()
@@ -27,6 +28,7 @@ namespace WuhEatz
         TimeBetweenChecks = TimeSpan.FromMinutes(5)
       };
 
+      builder.Services.AddScoped(x => logger);
       builder.Services.AddScoped(x => twtchsvc);
       builder.Services.AddScoped(x => new HttpClient());
 
@@ -41,7 +43,7 @@ namespace WuhEatz
       }
       else
       {
-        app.UseExceptionHandler("/Error");
+        //app.UseExceptionHandler("/Error");
         // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
         app.UseHsts();
         app.UseHttpsRedirection();

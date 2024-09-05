@@ -3,7 +3,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using WuhEatz.Shared.ExternalDataModels.Twitch;
 
-namespace WuhEatz.DenpaDB.Models
+namespace WuhEatz.Shared.DenpaDB.Models
 {
   public class UserProfile
   {
@@ -13,6 +13,5 @@ namespace WuhEatz.DenpaDB.Models
     public required TwitchOAuthAccessInfo Auth { get; set; }
     public SubscriptionData? SubData { get; set; }
     public ICollection<Session> Sessions { get; set; } = new List<Session>();
-    public int DenpaSubTeir { get; set; } = 0;
   }
 }

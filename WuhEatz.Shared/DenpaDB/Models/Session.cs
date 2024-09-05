@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson;
 
-namespace WuhEatz.DenpaDB.Models
+namespace WuhEatz.Shared.DenpaDB.Models
 {
   public class Session
   {

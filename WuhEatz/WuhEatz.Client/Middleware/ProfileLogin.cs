@@ -34,10 +34,7 @@ namespace WuhEatz.Middleware
         var result = await client.GetAsync($"{Nav.BaseUri}api/TwitchLogin");
         if (result.IsSuccessStatusCode)
           Console.WriteLine("Session is valid!");
-
-        //  TODO: Request a validation check from the server to see if the session is still valid.
-        //  If the session is valid, uhh... I forgor. I think we can do nothing.
-        //  If the session is invalid, redirect to the login page.
+        else cookies.Remove(cookies["session"]!);
       }
       //  If neither of the above are true, do nothing.
     }

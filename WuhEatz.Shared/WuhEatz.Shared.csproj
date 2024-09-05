@@ -6,4 +6,19 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="ArchiveContext.cs" />
+    <Compile Remove="ProfilesContext.cs" />
+    <Compile Remove="_StartupContext.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SharedModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+    <PackageReference Include="MongoDB.EntityFrameworkCore" Version="8.0.3" />
+  </ItemGroup>
+
 </Project>

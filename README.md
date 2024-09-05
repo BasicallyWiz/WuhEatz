@@ -40,9 +40,9 @@ This folder contains all of the services that run behind the serverr, such as th
 ## If you do contribute, no matter how small, add your name to the credits.razor page!
 
 ## Planned Features:
-### Database integration
-This should allow for many more features down the road that require data to be recorded.
 
 ### Denpa Archive
 This will be a library of images and other media (or something) that can be used for archiving art and media for and by Denpa.
 
+### Denpa's Links
+Epic linktree alternative, one that will look cool and be denp-ish!!
