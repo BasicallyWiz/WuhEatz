@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Archive.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.8" />
     <PackageReference Include="MongoDB.EntityFrameworkCore" Version="8.0.3" />
     <PackageReference Include="System.Text.Json" Version="8.0.4" />
@@ -16,12 +20,23 @@
 
   <ItemGroup>
     <Folder Include="Layout\" />
-    <Folder Include="Pages\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\WizWebComponents\WizWebComponents.csproj" />
     <ProjectReference Include="..\..\WuhEatz.Shared\WuhEatz.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Archive.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Archive.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Archive.razor" />
   </ItemGroup>
 
 </Project>

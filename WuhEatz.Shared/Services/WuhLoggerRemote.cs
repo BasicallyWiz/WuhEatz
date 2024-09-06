@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using Microsoft.Extensions.Options;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using WuhEatz.Shared.DenpaDB.Contexts;
 
 namespace WuhEatz.Shared.Services
@@ -12,7 +15,7 @@ namespace WuhEatz.Shared.Services
     {
       if (client is null) return Task.CompletedTask;
       var content = new StringContent($"\"{Data}\"", Encoding.UTF8, "application/json");
-      _= client.PostAsync($"/api/Logging/Debug", content);
+      _ = client.PostAsync($"/api/Logging/Debug", content);
       return Task.CompletedTask;
     }
     public Task LogInfo(string Data)

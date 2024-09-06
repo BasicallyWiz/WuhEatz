@@ -2,6 +2,8 @@
 using WuhEatz.Shared.DenpaDB.Contexts;
 using WuhEatz.Shared.DenpaDB.Models;
 using WuhEatz.Services;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace WuhEatz.Controllers
 {
@@ -9,6 +11,17 @@ namespace WuhEatz.Controllers
   [ApiController]
   public class Users : ControllerBase
   {
+    JsonSerializerOptions JsonOptions = new() 
+    {
+      ReferenceHandler = ReferenceHandler.IgnoreCycles
+    };
+    WuhLogger logger;
+
+    public Users(WuhLogger logger)
+    {
+      this.logger = logger;
+    }
+
     [HttpGet("list/{page:int}/")]
     public IActionResult ListUsers(int page, int itemsPerPage = 20)
     {
@@ -17,12 +30,14 @@ namespace WuhEatz.Controllers
 
       var sessionData = ctx.Sessions.FirstOrDefault(x => x.Code == session);
       if (sessionData is null) return Unauthorized("INVALID_SESSION");
-      Console.WriteLine("user is: " + ctx.Profiles.FirstOrDefault(x => x._id == sessionData.Owner_id)?.TwitchData.login);
-      if (ctx.Profiles.FirstOrDefault(x => x._id == sessionData.Owner_id)?.TwitchData.login != "basicallywiz") return Unauthorized("USER_NOT_WIZ");
+      var currentUser = ctx.Profiles.FirstOrDefault(x => x._id == sessionData.Owner_id);
+      logger.LogInfo($"User '{currentUser?.Username ?? "NONE"}' with id '{currentUser?._id}' just opened the admin page.");
+      if (currentUser?.TwitchData.login != "basicallywiz") return Unauthorized("USER_NOT_WIZ");
   
       List<UserProfile> users = ctx.Profiles.Skip(page * itemsPerPage).Take(itemsPerPage).ToList();
 
-      return Ok(users);
+      string ReturnData = JsonSerializer.Serialize(users, JsonOptions);
+      return Ok(ReturnData);
     }
   }
 }

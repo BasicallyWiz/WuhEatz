@@ -1,8 +1,31 @@
-﻿.wiz-card {
+﻿:root {
+  --color-one: #598271;
+  --color-three: #47685a;
+
+  --color-text: #f0f8ff;
+  --color-bg: #6fa28d;
+  --color-button: #89c8ae;
+  --color-button-alt: #aeffdd;
+  --color-border: #5ea286;
+}
+
+.wiz-card {
   margin: 12px;
   border-radius: 8px;
   backdrop-filter: brightness(.8) blur(10px);
   padding: 8px;
+}
+
+.card-layer-one {
+
+}
+
+.card-layer-two {
+
+}
+
+.card-layer-three {
+
 }
 
 .wiz-font-body {
