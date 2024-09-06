@@ -7,13 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ArchiveContext.cs" />
-    <Compile Remove="ProfilesContext.cs" />
-    <Compile Remove="_StartupContext.cs" />
+    <Compile Remove="SharedModels\**" />
+    <EmbeddedResource Remove="SharedModels\**" />
+    <None Remove="SharedModels\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="SharedModels\" />
+    <Compile Remove="ArchiveContext.cs" />
+    <Compile Remove="ProfilesContext.cs" />
+    <Compile Remove="_StartupContext.cs" />
   </ItemGroup>
 
   <ItemGroup>

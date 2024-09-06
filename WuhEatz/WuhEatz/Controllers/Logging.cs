@@ -72,7 +72,7 @@ namespace WuhEatz.Controllers
       string? session = HttpContext.Request.Cookies["session"];
       if (session is null)
       {
-        await logger.LogInfo(data);
+        await logger.LogDebug(data);
         return Ok();
       }
       else

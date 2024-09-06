@@ -9,6 +9,7 @@ namespace WuhEatz
   public class Program
   {
     public static MongoService? mongoService;
+    //TODO: Improve performance of logging, I think this is hitting startup time pretty hard
     public static WuhLogger logger = new("/Logs");
     public static void Main(string[] args)
     {
@@ -63,7 +64,7 @@ namespace WuhEatz
       /**
        * System.Net.Sockets.SocketException: 'The requested address is not valid in its context.'
        * Go to ./Properties/launchSettings.json and change "applicationUrl" for http and https to addresses available to you.
-       * This error throws when ASPNet core tries to listen to a used or inaccessible address.
+       * This error throws when ASPNet core tries to listen to a used or inaccessible port or address.
        */
       app.Run();
     }
