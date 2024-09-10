@@ -1,16 +1,19 @@
 using System.Runtime.CompilerServices;
 using WuhEatz.Components;
+using WuhEatz.Middleware;
 using WuhEatz.Services;
+using WuhEatz.Shared.Services;
 
 namespace WuhEatz
 {
   public class Program
   {
     public static MongoService? mongoService;
-
+    //TODO: Improve performance of logging, I think this is hitting startup time pretty hard
+    public static WuhLogger logger = new("/Logs");
     public static void Main(string[] args)
     {
-      var builder = WebApplication.CreateBuilder(args);
+      var builder = WebApplication.CreateBuilder(args); 
 
       // Add services to the container.
       builder.Services.AddRazorComponents()
@@ -25,7 +28,10 @@ namespace WuhEatz
         //  TODO: When we are no longer testing the twitch service, set the timespan to something longer. Probably best to do 5 minutes.
         TimeBetweenChecks = TimeSpan.FromMinutes(5)
       };
+
+      builder.Services.AddScoped(x => logger);
       builder.Services.AddScoped(x => twtchsvc);
+      builder.Services.AddScoped(x => new HttpClient());
 
       MongoService.instance = new();
 
@@ -38,12 +44,13 @@ namespace WuhEatz
       }
       else
       {
-        app.UseExceptionHandler("/Error");
+        //app.UseExceptionHandler("/Error");
         // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
         app.UseHsts();
         app.UseHttpsRedirection();
       }
 
+      //app.UseProfileLogin();
       app.MapControllers();
 
       app.UseStaticFiles();
@@ -57,7 +64,7 @@ namespace WuhEatz
       /**
        * System.Net.Sockets.SocketException: 'The requested address is not valid in its context.'
        * Go to ./Properties/launchSettings.json and change "applicationUrl" for http and https to addresses available to you.
-       * This error throws when ASPNet core tries to listen to a used or inaccessible address.
+       * This error throws when ASPNet core tries to listen to a used or inaccessible port or address.
        */
       app.Run();
     }

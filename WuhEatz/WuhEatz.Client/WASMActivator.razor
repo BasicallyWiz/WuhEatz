@@ -1,0 +1,12 @@
+﻿@rendermode InteractiveWebAssembly
+
+@code {
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    if (firstRender)
+    {
+      Console.WriteLine("The mere existence of this component enables WASM. (That is assuming this is the only wasm component in use)");
+    }
+    await base.OnAfterRenderAsync(firstRender);
+  }
+}

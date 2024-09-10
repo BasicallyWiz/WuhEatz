@@ -1,15 +1,15 @@
 ﻿@page "/bistro"
+
 @using WizWebComponents.Data
 @using WizWebComponents.Layout
 
 <PageTitle>The Denpafish Bistro!!!</PageTitle>
 
-<div style="padding: 5rem 0px 0px 0px; display:flex; flex-direction: column; align-items: center; background-image: url('images/bistro-background.jpg'); background-size:cover; background-position: center;">
-  <Card style="width: 70rem; max-width: calc(100% - 40px); display: flex; flex-direction: column; align-items: center;">
+<div style="padding: 7rem 0px 0px 0px; display:flex; flex-direction: column; align-items: center; background-image: url('images/bistro-background.jpg'); background-size:cover; background-position: center;">
+  <Card class="wiz-card" style="backdrop-filter: blur(10px) brightness(.8); width: 70rem; max-width: calc(100% - 40px); display: flex; flex-direction: column; align-items: center;">
     <Text Size="Title-L">The Denpafish Bistro</Text>
     <img src="/images/masterchef.jpg" style="height:20rem;"/>
     <Text Size="Subtitle" style="margin-bottom: 1rem;">I dare you to order something</Text>
     <img src="/images/denpa_fish_bistro.jpg" style="width:100%;"/>
-    <p style="margin:0px;" class="wiz-font-body">Ginko made this menu!! Thank you!</p>
   </Card>
 </div>

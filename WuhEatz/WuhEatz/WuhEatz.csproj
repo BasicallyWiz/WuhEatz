@@ -13,12 +13,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\WizWebComponents\WizWebComponents.csproj" />
+    <ProjectReference Include="..\..\WuhEatz.Shared\WuhEatz.Shared.csproj" />
     <ProjectReference Include="..\WuhEatz.Client\WuhEatz.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.8" />
     <PackageReference Include="MongoDB.EntityFrameworkCore" Version="8.0.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Middleware\" />
     <Folder Include="wwwroot\images\Food\" />
   </ItemGroup>
 

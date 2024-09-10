@@ -1,8 +1,56 @@
-﻿.wiz-card {
+﻿:root {
+  --color-one: #598271;
+  --color-two: #47685a;
+
+  --color-text: #f0f8ff;
+  --color-bg: #6fa28d;
+  --color-button: #7ab29a;
+  --color-button-alt: #87c5aa;
+  --color-border: #5ea286;
+}
+
+::selection {
+  background: #781e48;
+}
+
+.wiz-card {
   margin: 12px;
   border-radius: 8px;
-  backdrop-filter: brightness(.8) blur(10px);
+  /*Hi re-implement this when Chrome fixes their shit (Or don't if not having this end up working better)*/
+  /*backdrop-filter: brightness(.8) blur(10px);*/
   padding: 8px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.card-layer-one {
+  background-color: var(--color-one);
+}
+
+.card-layer-two {
+  background-color: var(--color-two);
+}
+
+.card-layer-three {
+
+}
+
+.wiz-button {
+  transition-duration: 0.2s;
+
+  display: flex;
+  flex-direction: row;
+
+  width: max-content; 
+  height: min-content; 
+
+  background-color: var(--color-button);
+  box-shadow: #00000024 0px 1px 5px;
+}
+.wiz-button:hover {
+  background-color: var(--color-button-alt);
+  box-shadow: #00000024 0px 1px 15px;
 }
 
 .wiz-font-body {

@@ -1,4 +1,5 @@
 ﻿@page "/"
+
 @using WizWebComponents.Data
 @using WizWebComponents.Layout
 @using WizWebComponents.Collections
@@ -6,14 +7,13 @@
 
 <PageTitle>Wuh Eatz!!</PageTitle>
 
-<div style="display: flex; flex-direction: column; margin-top: 4rem; align-items: center;">
+<div style="display: flex; flex-direction: column; margin-top: 6rem; align-items: center;">
   @if (TwitchService!.DenpaStats.IsLive)
   {
     <h1 class="wiz-font-display" style="width: 100%; margin: 6px; text-align: center; color: white;">Denpa is live!!</h1>
     <div style="align-self: center; aspect-ratio: 16/9; height: max-content; width: max-content; max-width: 95%; max-height: 40rem;">
-      <iframe src="@("https://player.twitch.tv/?channel=marimari_en&parent=" + Nav!.BaseUri.Replace("https://", "").Replace("http://", "").Replace("/", ""))" height="1080" width="1920" frameborder="0" allowfullscreen="true" scrolling="no" style="max-width: 100%; max-height: 100%; border-radius: 10px;"></iframe>
+      <iframe src="@("https://player.twitch.tv/?channel=denpafish&parent=" + Nav!.BaseUri.Replace("https://", "").Replace("http://", "").Replace("/", ""))" height="1080" width="1920" frameborder="0" allowfullscreen="true" scrolling="no" style="max-width: 100%; max-height: 100%; border-radius: 10px;"></iframe>
     </div>
-    <p style="margin: 0px; text-align: center;">For testing purposes, this player actually plays marimari_en</p>
   }
   else {
     <h1 Size="Title-L" style="width: 100%; text-align: center;">Welcome to Wuh Eatz!</h1>
@@ -26,17 +26,17 @@
     <WizNavLink icon="images/yt_logo.svg" href="https://www.youtube.com/channel/UCW13PfvXyHeUnRbX6rEkebw"><h2 class="wiz-font-title">Denpa Vids & Vods</h2></WizNavLink>
   </div>
 
-  <Card style="align-self: center; width: 70rem; max-width: calc(100% - 40px);">
+  <Card class="wiz-card card-layer-one" style="align-self: center; width: 70rem; max-width: calc(100% - 40px);">
     <Text Size="Title" style="margin-left: 20px;">A Few Things Wuh Likes To Eatz:</Text>
-    <Gallery Uris="@(new string[] { "images/Food/pickle.png", "images/Food/Bunger.png", "images/Food/chamoy.png", "images/Food/DenTummy.jpg"})" Size="20rem" />
+    <Gallery class="wiz-card card-layer-two" Uris="@(new string[] { "images/Food/pickle.png", "images/Food/Bunger.png", "images/Food/chamoy.png", "images/Food/DenTummy.jpg"})" Size="20rem" FlowHorizontal="true" />
   </Card>
 
   <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-    <WizNavLink href="https://discord.gg/3aDvdZzgUJ" icon="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg"><h2 class="wiz-font-title">Go to the Denplanet!</h2></WizNavLink>
+    <WizNavLink href="https://discord.gg/3aDvdZzgUJ" icon="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg"><h2 class="wiz-font-title">The Denplanet</h2></WizNavLink>
     <WizNavLink href="https://twitter.com/denpafish" icon="/images/x-logo-white.png"><h2 class="wiz-font-title">Denpa Tweets</h2></WizNavLink>
   </div>
 
-  <Card style="align-self: center; width: 50rem; max-width: calc(100% - 40px); display: flex; flex-direction: column; align-items: center">
+  <Card class="wiz-card card-layer-one" style="align-self: center; width: 50rem; max-width: calc(100% - 40px); display: flex; flex-direction: column; align-items: center">
     <Text Size="Title" style="margin-left: 20px;">Masterchef Wuh invites you to the bistro!!</Text>
     <img src="images/masterchef.jpg" style="width:20rem; align-self: center;" />
     <WizNavLink href="/bistro">

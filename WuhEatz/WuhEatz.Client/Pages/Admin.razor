@@ -1,0 +1,29 @@
+﻿@page "/admin"
+@rendermode InteractiveWebAssembly
+
+@using WizWebComponents.Layout
+@using WizWebComponents.Collections
+
+@using WuhEatz.Shared.DenpaDB.Models
+
+
+<h3 style="margin-top: 5rem; margin-left: 16px;">Admin</h3>
+
+<Card>
+  <h1 class="wiz-font-title">Users</h1>
+  <GridRepeater ItemsPerLine="4" IsVertical="true">
+    @foreach (UserProfile profile in users)
+    {
+      <Card>
+        <img src="@profile.TwitchData.profile_image_url" style="height: 100px; width: 100px;" />
+        <p>@(profile.Username)</p>
+        <p>@(profile.SubData?.tier)</p>
+      </Card>
+    }
+  </GridRepeater>
+  <div style="display: flex;">
+    @currentPage
+    <button @onclick="DecrementPage">Last Page</button>
+    <button @onclick="IncrementPage">Next Page</button>
+  </div>
+</Card>
