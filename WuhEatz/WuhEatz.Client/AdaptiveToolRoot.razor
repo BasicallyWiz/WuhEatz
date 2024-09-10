@@ -1,0 +1,8 @@
+﻿<!--Make sure this component doesn't pre-render, as that may cause issues on WASM launch-->
+@rendermode @(new InteractiveWebAssemblyRenderMode(false))
+
+@using WizWebComponents.Layout
+
+<Card class="wiz-card card-layer-one" @attributes="Splat">
+  <h1>Adaptive Tool Root</h1>
+</Card>

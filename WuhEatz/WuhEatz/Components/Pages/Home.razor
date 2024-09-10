@@ -7,7 +7,7 @@
 
 <PageTitle>Wuh Eatz!!</PageTitle>
 
-<div style="display: flex; flex-direction: column; margin-top: 4rem; align-items: center;">
+<div style="display: flex; flex-direction: column; margin-top: 6rem; align-items: center;">
   @if (TwitchService!.DenpaStats.IsLive)
   {
     <h1 class="wiz-font-display" style="width: 100%; margin: 6px; text-align: center; color: white;">Denpa is live!!</h1>
@@ -26,17 +26,17 @@
     <WizNavLink icon="images/yt_logo.svg" href="https://www.youtube.com/channel/UCW13PfvXyHeUnRbX6rEkebw"><h2 class="wiz-font-title">Denpa Vids & Vods</h2></WizNavLink>
   </div>
 
-  <Card style="align-self: center; width: 70rem; max-width: calc(100% - 40px);">
+  <Card class="wiz-card card-layer-one" style="align-self: center; width: 70rem; max-width: calc(100% - 40px);">
     <Text Size="Title" style="margin-left: 20px;">A Few Things Wuh Likes To Eatz:</Text>
-    <Gallery Uris="@(new string[] { "images/Food/pickle.png", "images/Food/Bunger.png", "images/Food/chamoy.png", "images/Food/DenTummy.jpg"})" Size="20rem" />
+    <Gallery class="wiz-card card-layer-two" Uris="@(new string[] { "images/Food/pickle.png", "images/Food/Bunger.png", "images/Food/chamoy.png", "images/Food/DenTummy.jpg"})" Size="20rem" FlowHorizontal="true" />
   </Card>
 
   <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-    <WizNavLink href="https://discord.gg/3aDvdZzgUJ" icon="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg"><h2 class="wiz-font-title">Go to the Denplanet!</h2></WizNavLink>
+    <WizNavLink href="https://discord.gg/3aDvdZzgUJ" icon="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg"><h2 class="wiz-font-title">The Denplanet</h2></WizNavLink>
     <WizNavLink href="https://twitter.com/denpafish" icon="/images/x-logo-white.png"><h2 class="wiz-font-title">Denpa Tweets</h2></WizNavLink>
   </div>
 
-  <Card style="align-self: center; width: 50rem; max-width: calc(100% - 40px); display: flex; flex-direction: column; align-items: center">
+  <Card class="wiz-card card-layer-one" style="align-self: center; width: 50rem; max-width: calc(100% - 40px); display: flex; flex-direction: column; align-items: center">
     <Text Size="Title" style="margin-left: 20px;">Masterchef Wuh invites you to the bistro!!</Text>
     <img src="images/masterchef.jpg" style="width:20rem; align-self: center;" />
     <WizNavLink href="/bistro">
@@ -45,6 +45,4 @@
       </Text>
     </WizNavLink>
   </Card>
-
-  <blockquote class="twitter-tweet" data-dnt="true" data-theme="dark"><p lang="en" dir="ltr">I want to be milked</p>&mdash; denpafish 🛸🪐 (@@denpafish) <a href="https://twitter.com/denpafish/status/1831745806829023360?ref_src=twsrc%5Etfw">September 5, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
